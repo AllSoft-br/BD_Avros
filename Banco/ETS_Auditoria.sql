@@ -9,6 +9,7 @@ CREATE TABLE tbl_registro(
 	cod_sql TINYTEXT NOT NULL, #Guarda o código SQL usado
 	dado_ant VARCHAR(50), #Guarda o dado antes da modificação
 	dado_novo VARCHAR(50), #Guarda o dado após a modificação
+	campo VARCHAR(20) NOT NULL, #Ação feita, insert/update/delete
 	data_alt TIMESTAMP DEFAULT NOW(), #Data alteração
 	fk_id_login INT(10) UNSIGNED NOT NULL, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
 	PRIMARY KEY(id_reg),
@@ -29,16 +30,17 @@ SELECT * FROM tbl_registro;
 DELIMITER $
 
 CREATE PROCEDURE insere_registro (IN tabela_alt VARCHAR(50), cod_ref INT(10), acao VARCHAR(15),
-									desc_acao TINYTEXT, X INT(10), cod_sql TINYTEXT)
+									desc_acao TINYTEXT, id_login INT(10), cod_sql TINYTEXT, dado_ant VARCHAR(50), dado_novo VARCHAR(50), campo varchar(20))
 
 	BEGIN
 
-		INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, fk_id_login,  cod_sql)
-		VALUES (tabela_alt, cod_ref, acao, desc_acao, X, cod_sql);
+		INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, fk_id_login,  cod_sql, dado_ant, dado_novo, campo)
+		VALUES (tabela_alt, cod_ref, acao, desc_acao, id_login, cod_sql, dado_ant, dado_novo, campo);
 	
 	END $
 
 Delimiter ;
+
 
 CALL insere_registro('Tabela Cliente', 1, 'INSERT', 'Inserir um dado na tabela Cliente', 1,
 

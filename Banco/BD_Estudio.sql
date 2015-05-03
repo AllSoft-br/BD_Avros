@@ -27,6 +27,7 @@ CREATE TABLE tbl_cliente (
   nome VARCHAR(100) NOT NULL,
   CPF CHAR(11) NOT NULL,
   sexo BOOLEAN DEFAULT 0, # 0 = Masculino, 1 = Feminino
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
   estado VARCHAR(30),
@@ -54,6 +55,7 @@ CREATE TABLE tbl_representante (
   nome VARCHAR(100) NOT NULL,
   CPF CHAR(11) NOT NULL,
   sexo BOOLEAN DEFAULT 0, # 0 = masculino, 1 = feminino
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
   PRIMARY KEY (id_representante),
@@ -66,7 +68,7 @@ CREATE TABLE tbl_representante (
 #Tabela Grau de Parentesco
 CREATE TABLE tbl_parentesco(
 id_parentesco INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-tipo_parentesco VARCHAR(20) NOT NULL, #Se é pai, mãe, avó, etc.
+tipo_parentesco VARCHAR(20) NOT NULL,
 PRIMARY KEY(id_parentesco));
 #------------------------------------------------------------------------------------------------------------
 
@@ -114,6 +116,7 @@ CREATE TABLE tbl_orcamento (
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   fk_id_cli_orc INT(10) UNSIGNED NOT NULL, #Criação do campo da chave estrangeira da tabela Cliente
   PRIMARY KEY (cod_orc),
 
@@ -138,6 +141,7 @@ CREATE TABLE tbl_sessao (
   data_agendada DATE NOT NULL,
   hora_agendada TIME NOT NULL,
   desconto DECIMAL(10,2) NULL DEFAULT '0.00',
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   fk_cod_orc INT(10) UNSIGNED NOT NULL, #Chave estrangeira tabela Orçamento
   PRIMARY KEY (id_sessao),
 
@@ -152,7 +156,7 @@ CREATE TABLE tbl_sessao (
 
 
 #-----------------------------------------------------------------------------------------------------------
-#Tabela Orçamento Concluidos - Tabela onde os arquivos só serão jogados após a conclusão das sessões
+#Tabela Orçamento Concluidos
 CREATE TABLE tbl_orccon (
   cod_orccon INT(10) NOT NULL,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
@@ -175,7 +179,7 @@ CREATE TABLE tbl_orccon (
 
 
 #-----------------------------------------------------------------------------------------------------------
-#Tabela Sessões Concluídas - Tabela onde os arquivos só serão jogados após a conclusão das sessões
+#Tabela Sessões Concluídas
 CREATE TABLE tbl_sescon (
   id_sescon INT(10) NOT NULL,
   concluida BOOLEAN NULL DEFAULT 0, #0 não concluida, 1 concluida

@@ -7,9 +7,11 @@ CREATE VIEW cliente_menor AS
         REL.id_rel AS 'ID da tabela relação',
         CLI.nome AS 'Nome do cliente',
 		CLI.CPF AS 'CPF do cliente',
+		CLI.id_cli AS 'ID do cliente',
 		PAR.tipo_parentesco AS 'Tipo do parentesco',
 		REP.nome AS 'Nome do Representante',
-		REP.CPF AS 'CPF do representante'
+		REP.CPF AS 'CPF do representante',
+		REP.id_representante AS 'ID do representante'
     FROM
         tbl_cliente CLI,
         tbl_parentesco PAR,

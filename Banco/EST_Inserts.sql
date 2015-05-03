@@ -18,7 +18,7 @@ INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
 VALUES ('Douglas Lambertinny', '64837748274', '1994/04/20', '9876-5432', 1);
 
 INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
-VALUES ('Luana Ferreira Nascimento', '37485574758', 1, '1997-07-14', '1234-5678', 2);
+VALUES ('Luana Ferreira Nascimento', '44939416852', 1, '1997-07-14', '1234-5678', 2);
 
 SELECT * FROM tbl_cliente;
 #------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ SELECT * FROM tbl_parentesco;
 #------------------------------------------------------------------------------------------------------------
 #TABELA RELAÇÃO
 INSERT INTO tbl_rel (fk_id_cli, fk_id_parentesco, fk_id_representante)
-VALUES (2, 2, 1);
+VALUES (1, 2, 1);
 
 SELECT * FROM tbl_rel;
 #------------------------------------------------------------------------------------------------------------
@@ -72,16 +72,16 @@ SELECT * FROM tbl_rel;
 #------------------------------------------------------------------------------------------------------------
 #TABELA ORCAMENTO
 insert into tbl_orcamento(tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
-values ('cartão', 1090.98, 6, 1);
+values ('cartão', 1090.98, 2, 1);
 
-select * from tbl_orcamento;
+select * from tbl_orcamento where cod_orc = 1004;
 #------------------------------------------------------------------------------------------------------------
 
 
 #------------------------------------------------------------------------------------------------------------------
 #TABELA SESSÃO
 INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orc)
-VALUES ('0', 100.00, 'cartão', '2015-06-15', '15:00', 0, 1);
+VALUES (1, 100.00, 'cartão', '2015-06-15', '15:00', 0, 1004);
 
 INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orc)
 VALUES ('0', 100.00, 'cartão', '2015-06-25', '13:00', 0, 1);
