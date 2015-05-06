@@ -36,10 +36,26 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 
 Delimiter ;
 
+#--------------------------------------------------------------------------------------------------------
 
-CALL orcamento_concluido(1004);
 
-SELECT * FROM tbl_orcamento;
-SELECT * FROM tbl_orccon;
-SELECT * FROM tbl_sessao;
-SELECT * FROM tbl_sescon;
+
+
+
+#---------------------------------------------------------------------------------------------------------
+#Procedure que grava as informações na auditoria
+DELIMITER $
+
+CREATE PROCEDURE insere_registro (IN tabela_alt VARCHAR(50), cod_ref INT(10), acao VARCHAR(15),
+									desc_acao TINYTEXT, id_login INT(10), cod_sql TINYTEXT, dado_ant VARCHAR(50), dado_novo VARCHAR(50), campo varchar(20))
+
+	BEGIN
+
+		INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, fk_id_login,  cod_sql, dado_ant, dado_novo, campo)
+		VALUES (tabela_alt, cod_ref, acao, desc_acao, id_login, cod_sql, dado_ant, dado_novo, campo);
+	
+	END $
+
+Delimiter ;
+
+#-------------------------------------------------------------------------------------------------------------

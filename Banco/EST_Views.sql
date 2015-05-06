@@ -1,6 +1,10 @@
 #-----------------------------------------------------------------------------------
 #Views do Sistema
 
+
+
+
+#-----------------------------------------------------------------------------------
 #Mostra os clientes que são menores de dado
 CREATE VIEW cliente_menor AS
     SELECT 
@@ -22,3 +26,51 @@ CREATE VIEW cliente_menor AS
 	AND REL.fk_id_parentesco = PAR.id_parentesco;
 
 SELECT * FROM cliente_menor;
+#-----------------------------------------------------------------------------------
+
+
+
+
+#-----------------------------------------------------------------------------------
+#Auditoria - últimas 24h
+CREATE VIEW auditoria_24h AS
+	SELECT * 
+		FROM tbl_registro 
+		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 1 DAY);
+
+#-----------------------------------------------------------------------------------
+
+
+
+
+#-----------------------------------------------------------------------------------
+#Auditoria - últimos 3 dias
+CREATE VIEW auditoria_3d AS
+	SELECT * 
+		FROM tbl_registro 
+		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 3 DAY);
+#-----------------------------------------------------------------------------------
+
+
+
+
+
+#-----------------------------------------------------------------------------------
+#Auditoria - últimos 7 dias
+CREATE VIEW auditoria_7d AS
+	SELECT * 
+		FROM tbl_registro 
+		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 7 DAY);
+#-----------------------------------------------------------------------------------
+
+
+
+
+
+#-----------------------------------------------------------------------------------
+#Auditoria - último mês
+CREATE VIEW auditoria_1m AS
+	SELECT * 
+		FROM tbl_registro 
+		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 1 MONTH);
+#-----------------------------------------------------------------------------------
