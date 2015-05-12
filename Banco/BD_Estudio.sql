@@ -4,18 +4,33 @@ CREATE DATABASE bd_estudio;
 USE bd_estudio;
 
 #------------------------------------------------------------------------------------------------------------
+#Tabela dados da empresa
+CREATE TABLE empresa_dados(
+  cnpj CHAR(18) UNIQUE NOT NULL,
+  razao_social VARCHAR(50) NOT NULL,
+  tel VARCHAR(20) NOT NULL,
+  uf VARCHAR(30),
+  cidade VARCHAR(30),
+  bairro VARCHAR(30),  
+  logradouro VARCHAR(30),
+  cep CHAR(9),
+  nro VARCHAR(8),
+  PRIMARY KEY(cnpj));
+#------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------
 #Tabela Login
 CREATE TABLE tbl_login (
-  id_login INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_login INT(10) UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
-  CPF CHAR(11) NOT NULL,
+  CPF CHAR(11) UNIQUE NOT NULL,
   login VARCHAR(30) NOT NULL,
   senha VARCHAR(16) NOT NULL,
   admin BOOLEAN DEFAULT '0', # 0 = Comum, 1 = Administrador
-  ativo BOOLEAN DEFAULT 1, # 1 = Ativo, 0 = Inativo
-  PRIMARY KEY (id_login),
-  UNIQUE INDEX login (login ASC), #Permite que o campo Login não se repita
-  UNIQUE INDEX cpf (cpf ASC)); #Permite que o campo CPF não se repita
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
+  PRIMARY KEY (id_login));
 #-----------------------------------------------------------------------------------------------------------
 
 
@@ -25,17 +40,16 @@ CREATE TABLE tbl_login (
 CREATE TABLE tbl_cliente (
   id_cli INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
-  CPF CHAR(11) NOT NULL,
+  CPF CHAR(11) UNIQUE NOT NULL,
   sexo BOOLEAN DEFAULT 0, # 0 = Masculino, 1 = Feminino
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
   estado VARCHAR(30),
   cidade VARCHAR(30),
   bairro VARCHAR(30),
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   fk_id_login INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (id_cli),
-  UNIQUE INDEX cpf (cpf ASC), #Permite que o campo CPF não se repita
 
   INDEX idx_fk_cliente_login (fk_id_login ASC),
 
@@ -53,13 +67,12 @@ CREATE TABLE tbl_cliente (
 CREATE TABLE tbl_representante (
   id_representante INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
-  CPF CHAR(11) NOT NULL,
+  CPF CHAR(11) UNIQUE NOT NULL,
   sexo BOOLEAN DEFAULT 0, # 0 = masculino, 1 = feminino
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id_representante),
-  UNIQUE INDEX cpf (cpf ASC)); #Permite que o campo CPF não se repita
+  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
+  PRIMARY KEY (id_representante));
 #------------------------------------------------------------------------------------------------------------
 
 
@@ -68,7 +81,7 @@ CREATE TABLE tbl_representante (
 #Tabela Grau de Parentesco
 CREATE TABLE tbl_parentesco(
 id_parentesco INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-tipo_parentesco VARCHAR(20) NOT NULL,
+tipo_parentesco VARCHAR(20) NOT NULL, #Se é pai, mãe, avó, etc.
 PRIMARY KEY(id_parentesco));
 #------------------------------------------------------------------------------------------------------------
 
@@ -113,10 +126,10 @@ CREATE TABLE tbl_rel (
 CREATE TABLE tbl_orcamento (
   cod_orc INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
+  descricao TINYTEXT NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   fk_id_cli_orc INT(10) UNSIGNED NOT NULL, #Criação do campo da chave estrangeira da tabela Cliente
   PRIMARY KEY (cod_orc),
 
@@ -140,8 +153,7 @@ CREATE TABLE tbl_sessao (
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   data_agendada DATE NOT NULL,
   hora_agendada TIME NOT NULL,
-  desconto DECIMAL(10,2) NULL DEFAULT '0.00',
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
+  desconto DECIMAL(10,2) NULL DEFAULT '0',
   fk_cod_orc INT(10) UNSIGNED NOT NULL, #Chave estrangeira tabela Orçamento
   PRIMARY KEY (id_sessao),
 
@@ -156,7 +168,7 @@ CREATE TABLE tbl_sessao (
 
 
 #-----------------------------------------------------------------------------------------------------------
-#Tabela Orçamento Concluidos
+#Tabela Orçamento Concluidos - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_orccon (
   cod_orccon INT(10) NOT NULL,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
@@ -179,7 +191,7 @@ CREATE TABLE tbl_orccon (
 
 
 #-----------------------------------------------------------------------------------------------------------
-#Tabela Sessões Concluídas
+#Tabela Sessões Concluídas - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_sescon (
   id_sescon INT(10) NOT NULL,
   concluida BOOLEAN NULL DEFAULT 0, #0 não concluida, 1 concluida
@@ -216,7 +228,6 @@ CREATE TABLE tbl_registro(
 	cod_sql TINYTEXT NOT NULL, #Guarda o código SQL usado
 	dado_ant VARCHAR(50), #Guarda o dado antes da modificação
 	dado_novo VARCHAR(50), #Guarda o dado após a modificação
-	campo VARCHAR(20) NOT NULL, #Ação feita, insert/update/delete
 	data_alt TIMESTAMP DEFAULT NOW(), #Data alteração
 	fk_id_login INT(10) UNSIGNED NOT NULL, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
 	PRIMARY KEY(id_reg),
@@ -229,5 +240,4 @@ CREATE TABLE tbl_registro(
 		ON DELETE NO ACTION #Permite que as chaves sejam excluidas e atualizadas
 		ON UPDATE NO ACTION #Permite que as chaves sejam excluidas e atualizadas
 );
-
 #-----------------------------------------------------------------------------------------------------------

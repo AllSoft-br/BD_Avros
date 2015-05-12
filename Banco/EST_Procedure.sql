@@ -1,5 +1,5 @@
 #A procedure será chamada quando todas as sessões forem concluidas
-#Assim ele cria uma cópia dos dados para as respectivas tablas de orçamento e sessão concluidas
+#Assim ele cria uma cópia dos dados para as respectivas tabelas de orçamento e sessões concluidas
 
 DELIMITER $
 CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
@@ -35,9 +35,40 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 	END $
 
 Delimiter ;
+#----------------------------------------------------------------------------------------------------------------------------------------------
 
-#--------------------------------------------------------------------------------------------------------
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+#Procedure que deleta as sessões
+
+DELIMITER $
+CREATE PROCEDURE del_sessao(IN fk_id_orc INT(10))
+
+	BEGIN
+
+		DELETE FROM tbl_sessao WHERE fk_cod_orc = fk_id_orc;
+	
+	END $
+
+Delimiter ;
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#Procedure que deleta os orçamentos
+
+DELIMITER $
+CREATE PROCEDURE del_orcamento(IN fk_id_orc INT(10))
+
+	BEGIN
+
+		call del_sessao(fk_id_orc);
+		DELETE FROM tbl_orcamento WHERE cod_orc = fk_id_orc;
+	
+	END $
+
+Delimiter ;
+#------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
