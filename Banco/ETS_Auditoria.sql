@@ -41,11 +41,4 @@ CREATE PROCEDURE insere_registro (IN tabela_alt VARCHAR(50), cod_ref INT(10), ac
 
 Delimiter ;
 
-
-CALL insere_registro('Tabela Cliente', 1, 'INSERT', 'Inserir um dado na tabela Cliente', 1,
-
-					'INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-					VALUES ("Douglas Lambertinny", "64837748274", "1994/04/20", "9876-5432", 1);'
-
-);
 #-------------------------------------------------------------------------------------------------------------

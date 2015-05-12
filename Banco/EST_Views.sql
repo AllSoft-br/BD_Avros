@@ -12,7 +12,7 @@ CREATE VIEW cliente_menor AS
         CLI.nome AS 'Nome do cliente',
 		CLI.CPF AS 'CPF do cliente',
 		CLI.id_cli AS id_cli,
-		PAR.tipo_parentesco AS 'Tipo do parentesco',
+		PAR.tipo_parentesco AS tipo_parentesco,
 		REP.nome AS 'Nome do Representante',
 		REP.CPF AS 'CPF do representante',
 		REP.id_representante AS id_representante
