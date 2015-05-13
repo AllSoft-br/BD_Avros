@@ -30,6 +30,23 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 			DELETE FROM tbl_sessao WHERE fk_cod_orc = id_orc;
 			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;
 
+			INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, cod_sql)
+			VALUES ('tbl_orcamento', id_orc, 'delete', CONCAT('o pagamento da última sessão do orçamento ', CAST(id_orc as char(15)),
+			' foi efetuado, e o orçamento foi concluído'), 'INSERT INTO tbl_orccon(cod_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
+			SELECT cod_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
+			FROM tbl_orcamento
+			WHERE cod_orc = id_orc;
+
+			INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orccon)
+			SELECT id_sessao, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orc
+			FROM tbl_sessao	
+			WHERE fk_cod_orc = id_orc
+			#GROUP BY fk_cod_orc
+			;
+
+			DELETE FROM tbl_sessao WHERE fk_cod_orc = id_orc;
+			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;');
+
 		end if;
 	
 	END $
