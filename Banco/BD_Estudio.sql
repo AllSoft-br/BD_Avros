@@ -225,11 +225,11 @@ CREATE TABLE tbl_registro(
 	cod_ref INT(10) NOT NULL, #Campo que vai referenciar o ID da pessoa/objeto da tabela alterada
 	acao VARCHAR(15) NOT NULL, #Ação feita, insert/update/delete
 	desc_acao TINYTEXT NOT NULL, #Recebe o código usado na alteração
-	cod_sql TINYTEXT NOT NULL, #Guarda o código SQL usado
+	cod_sql TEXT, #Guarda o código SQL usado
 	dado_ant VARCHAR(50), #Guarda o dado antes da modificação
 	dado_novo VARCHAR(50), #Guarda o dado após a modificação
 	data_alt TIMESTAMP DEFAULT NOW(), #Data alteração
-	fk_id_login INT(10) UNSIGNED NOT NULL, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
+	fk_id_login INT(10) UNSIGNED, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
 	PRIMARY KEY(id_reg),
 	
 	INDEX idx_fk_registro_login (fk_id_login ASC),
