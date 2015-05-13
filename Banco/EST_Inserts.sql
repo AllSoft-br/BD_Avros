@@ -19,6 +19,17 @@ SELECT * FROM tbl_login;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+#Tabela empresa
+insert into empresa_dados(cnpj, razao_social, tel, uf, cidade, bairro, logradouro, cep, nro, complemento)
+values ('65.480.862/0001-04', 'Estúdio Tattoo', '0800 000 000', 'SP', 'São Paulo', 'Jd. Bairro', 'Rua Piribibi', '0800-987', '87', '2º andar');
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #INSERTS DA TABELA CLIENTE
 INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
@@ -160,64 +171,3 @@ VALUES ('1', 50.00, 'Não especificada ..hm..', '2015-08-15', '22:00', 4);
 
 SELECT * FROM tbl_sessao;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-#-----------------------------------------------------------------------------------------------------------------
-#Auditoria
-
-INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, fk_id_login,  cod_sql, dado_ant, dado_novo, campo, data_alt)
-		VALUES ('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-10 10:00:00'),
-('tbl_sessao', 1, 'insert', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-10 10:00:00'),
-('tbl_sessao', 1, 'insert', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-9 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-8 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-7 10:00:00'),
-
-('tbl_sessao', 1, 'login', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-6 10:00:00'),
-('tbl_sessao', 1, 'login', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-5 10:00:00'),
-('tbl_cliente', 1, 'login', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-10 10:00:00'),
-('tbl_cliente', 1, 'login', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-9 10:00:00'),
-('tbl_cliente', 1, 'login', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-8 10:00:00'),
-('tbl_cliente', 1, 'login', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-7 10:00:00'),
-
-('tbl_sessao', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-9 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-8 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-7 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-6 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-5 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-4 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-3 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-2 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-1 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-30 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-29 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-28 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-27 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-03-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-03-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-03-10 10:00:00'),
-('tbl_cliente', 1, 'delete', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-10 10:00:00'),
-
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-9 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-8 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-7 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-6 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-5 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 2, 'sql genérico', '-', '-', '-', '2015-05-4 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-3 10:00:00'),
-('tbl_cliente', 1, 'update', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-05-10 10:00:00'),
-
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-04-11 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-03-12 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-13 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-14 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-10 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-10 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-10 10:00:00'),
-('tbl_cliente', 1, 'insert', 'genérico', 1, 'sql genérico', '-', '-', '-', '2015-02-10 10:00:00');

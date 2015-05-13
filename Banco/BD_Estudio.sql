@@ -15,6 +15,7 @@ CREATE TABLE empresa_dados(
   logradouro VARCHAR(30),
   cep CHAR(9),
   nro VARCHAR(8),
+  complemento varchar(100),
   PRIMARY KEY(cnpj));
 #------------------------------------------------------------------------------------------------------------
 
