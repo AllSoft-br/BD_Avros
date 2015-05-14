@@ -15,7 +15,7 @@ CREATE TABLE empresa_dados(
   logradouro VARCHAR(30),
   cep CHAR(9),
   nro VARCHAR(8),
-  complemento varchar(100),
+  complemento VARCHAR(100),
   PRIMARY KEY(cnpj));
 #------------------------------------------------------------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE tbl_rel (
 CREATE TABLE tbl_orcamento (
   cod_orc INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
-  descricao TINYTEXT NOT NULL,
+  desc_tatto TINYTEXT NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
@@ -173,6 +173,7 @@ CREATE TABLE tbl_sessao (
 CREATE TABLE tbl_orccon (
   cod_orccon INT(10) NOT NULL,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
+  desc_tatto TINYTEXT NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,

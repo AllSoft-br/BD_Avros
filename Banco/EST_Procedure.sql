@@ -5,15 +5,15 @@ DELIMITER $
 CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 
 	BEGIN
-		DECLARE nsessoes int(10);
-		DECLARE concluidas int(10);
+		DECLARE nsessoes INT(10);
+		DECLARE concluidas INT(10);
 		
-		select qntd_sessao from tbl_orcamento where cod_orc = id_orc into @nsessoes;
-		select count(id_sessao) from tbl_sessao 
-				where concluida = 1
-				and fk_cod_orc = id_orc into @concluidas;
+		SELECT qntd_sessao FROM tbl_orcamento WHERE cod_orc = id_orc INTO @nsessoes;
+		SELECT COUNT(id_sessao) FROM tbl_sessao 
+				WHERE concluida = 1
+				AND fk_cod_orc = id_orc INTO @concluidas;
 
-		if @nsessoes <= @concluidas then
+		IF @nsessoes <= @concluidas THEN
 
 			INSERT INTO tbl_orccon(cod_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
 			SELECT cod_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
@@ -31,7 +31,7 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;
 
 			INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, cod_sql)
-			VALUES ('tbl_orcamento', id_orc, 'delete', CONCAT('o pagamento da última sessão do orçamento ', CAST(id_orc as char(15)),
+			VALUES ('tbl_orcamento', id_orc, 'delete', CONCAT('o pagamento da última sessão do orçamento ', CAST(id_orc AS CHAR(15)),
 			' foi efetuado, e o orçamento foi concluído'), 'INSERT INTO tbl_orccon(cod_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
 			SELECT cod_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
 			FROM tbl_orcamento
@@ -47,11 +47,11 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 			DELETE FROM tbl_sessao WHERE fk_cod_orc = id_orc;
 			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;');
 
-		end if;
+		END IF;
 	
 	END $
 
-Delimiter ;
+DELIMITER ;
 #----------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -84,7 +84,25 @@ CREATE PROCEDURE del_orcamento(IN fk_id_orc INT(10))
 	
 	END $
 
-Delimiter ;
+DELIMITER ;
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+DELIMITER $
+CREATE PROCEDURE calcula_idade(IN fk_id_orc INT(10))
+
+	BEGIN
+
+	END $
+
+DELIMITER ;
+
+
+
+
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -105,5 +123,12 @@ CREATE PROCEDURE insere_registro (IN tabela_alt VARCHAR(50), cod_ref INT(10), ac
 	END $
 
 Delimiter ;
+
+CALL insere_registro('tbl_cliente', 1, 'delete', 'Inserir um dado na tabela Cliente', 1,
+
+					'INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
+					VALUES ("Douglas Lambertinny", "64837748274", "1994/04/20", "9876-5432", 1);', '-', '-', '-'
+
+);
 
 #-------------------------------------------------------------------------------------------------------------

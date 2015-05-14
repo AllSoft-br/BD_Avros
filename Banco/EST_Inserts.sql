@@ -1,6 +1,15 @@
 #INSERTS DAS TABELAS
 
 
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+#Tabela empresa
+INSERT INTO empresa_dados(cnpj, razao_social, tel, uf, cidade, bairro, logradouro, cep, nro, complemento)
+VALUES ('65.480.862/0001-04', 'Estúdio Tattoo', '0800 000 000', 'SP', 'São Paulo', 'Jd. Bairro', 'Rua Piribibi', '0800-987', '87', '2º andar');
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #INSERTS DA TABELA LOGIN
 INSERT INTO tbl_login (nome, CPF, login, senha, admin)
@@ -17,16 +26,6 @@ VALUES ('Ronaldo Nazaro', '73648371758', 'Rnd', '213');
 
 SELECT * FROM tbl_login;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-#-------------------------------------------------------------------------------------------------------------------------------------------------
-#Tabela empresa
-insert into empresa_dados(cnpj, razao_social, tel, uf, cidade, bairro, logradouro, cep, nro, complemento)
-values ('65.480.862/0001-04', 'Estúdio Tattoo', '0800 000 000', 'SP', 'São Paulo', 'Jd. Bairro', 'Rua Piribibi', '0800-987', '87', '2º andar');
-#-------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
 
@@ -104,19 +103,19 @@ SELECT * FROM tbl_rel;
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #TABELA ORCAMENTO
-insert into tbl_orcamento(tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
-values ('cartão', 1090.98, 4, 1);
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+VALUES ('Dragão com garras de metal', 'cartão', 1090.98, 4, 1);
 
-insert into tbl_orcamento(tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
-values ('Dinheiro', 398.80, 3, 2);
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+VALUES ('Logotipo do Corinthians', 'Dinheiro', 398.80, 3, 2);
 
-insert into tbl_orcamento(tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
-values ('Cartão', 200.00, 2, 3);
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+VALUES ('Frase de amor aos pais', 'Cartão', 200.00, 2, 3);
 
-insert into tbl_orcamento(tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
-values ('Não específicado ..hmm..', 50.00, 1, 4);
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+VALUES ('Coruja colorida', 'Não específicado ..hmm..', 50.00, 1, 4);
 
-select * from tbl_orcamento;
+SELECT * FROM tbl_orcamento;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -135,16 +134,6 @@ VALUES ('0', 100.00, 'cartão', '2015-07-10', '15:00', 1);
 INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
 VALUES ('1', 100.00, 'cartão', '2015-07-30', '15:00', 1);
 
-
-
-
-#------------------------------------------------------------------------------------------------------------------
-CALL insere_registro('tbl_cliente', 1, 'delete', 'Inserir um dado na tabela Cliente', 1,
-
-					'INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-					VALUES ("Douglas Lambertinny", "64837748274", "1994/04/20", "9876-5432", 1);', '-', '-', '-'
-
-);
 
 
 INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
