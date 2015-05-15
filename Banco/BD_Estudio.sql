@@ -29,8 +29,8 @@ CREATE TABLE tbl_login (
   CPF CHAR(11) UNIQUE NOT NULL,
   login VARCHAR(30) NOT NULL,
   senha VARCHAR(16) NOT NULL,
-  admin BOOLEAN DEFAULT '0', # 0 = Comum, 1 = Administrador
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
+  admin BOOLEAN DEFAULT '1', # 1 = Administrador, 0 = Comum
+  ativo BOOLEAN DEFAULT '1', # 1 = Ativo, 0 = Inativo
   PRIMARY KEY (id_login));
 #-----------------------------------------------------------------------------------------------------------
 
@@ -48,7 +48,6 @@ CREATE TABLE tbl_cliente (
   estado VARCHAR(30),
   cidade VARCHAR(30),
   bairro VARCHAR(30),
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   fk_id_login INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (id_cli),
 
@@ -72,7 +71,6 @@ CREATE TABLE tbl_representante (
   sexo BOOLEAN DEFAULT 0, # 0 = masculino, 1 = feminino
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
-  ativo BOOLEAN DEFAULT '0', # 0 = Ativo, 1 = Inativo
   PRIMARY KEY (id_representante));
 #------------------------------------------------------------------------------------------------------------
 

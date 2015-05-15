@@ -20,8 +20,6 @@ CREATE VIEW cliente_menor AS
     WHERE REL.fk_id_cli = CLI.id_cli 
 	AND REL.fk_id_representante = REP.id_representante 
 	AND REL.fk_id_parentesco = PAR.id_parentesco;
-
-SELECT * FROM cliente_menor;
 #-----------------------------------------------------------------------------------
 
 

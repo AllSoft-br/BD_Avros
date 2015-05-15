@@ -15,18 +15,23 @@ END $
 DELIMITER ;
 
 SELECT valor, formatar_moeda(valor) FROM tbl_produto;
+#------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
+#------------------------------------------------------------------------------------------------------------------------------------------------
 DELIMITER $
-CREATE FUNCTION calcula_idade(id_cliente INT(10)) RETURNS INT(15)
+CREATE FUNCTION calcula_idade(idade INT(10)) RETURNS INT(10)
 DETERMINISTIC
 BEGIN
 
-	SELECT YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS('1994-12-04'))) AS Idade;
-	
+	DECLARE idade INT(10);
+	SET @idade = (SELECT YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS((SELECT data_nasc FROM tbl_cliente WHERE id_cliente = id_cliente)))) AS Idade);
+	RETURN idade;
+
 END $
 DELIMITER ;
 
+DROP function calcula_idade;
 
+SELECT data_nasc, calcula_idade(idade) FROM tbl_cliente WHERE id_cliente = 2;
+#------------------------------------------------------------------------------------------------------------------------------------------------

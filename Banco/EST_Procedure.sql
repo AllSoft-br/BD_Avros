@@ -79,33 +79,13 @@ CREATE PROCEDURE del_orcamento(IN fk_id_orc INT(10))
 
 	BEGIN
 
-		call del_sessao(fk_id_orc);
+		CALL del_sessao(fk_id_orc);
 		DELETE FROM tbl_orcamento WHERE cod_orc = fk_id_orc;
 	
 	END $
 
 DELIMITER ;
 #------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-#------------------------------------------------------------------------------------------------------------------------------------------------
-DELIMITER $
-CREATE PROCEDURE calcula_idade(IN fk_id_orc INT(10))
-
-	BEGIN
-
-	END $
-
-DELIMITER ;
-
-
-
-
-#------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 
 #---------------------------------------------------------------------------------------------------------
@@ -123,12 +103,4 @@ CREATE PROCEDURE insere_registro (IN tabela_alt VARCHAR(50), cod_ref INT(10), ac
 	END $
 
 Delimiter ;
-
-CALL insere_registro('tbl_cliente', 1, 'delete', 'Inserir um dado na tabela Cliente', 1,
-
-					'INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-					VALUES ("Douglas Lambertinny", "64837748274", "1994/04/20", "9876-5432", 1);', '-', '-', '-'
-
-);
-
 #-------------------------------------------------------------------------------------------------------------
