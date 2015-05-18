@@ -13,8 +13,6 @@ BEGIN
 	RETURN CONCAT('R$', formatado);
 END $
 DELIMITER ;
-
-SELECT valor, formatar_moeda(valor) FROM tbl_produto;
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -30,8 +28,4 @@ BEGIN
 
 END $
 DELIMITER ;
-
-DROP function calcula_idade;
-
-SELECT data_nasc, calcula_idade(idade) FROM tbl_cliente WHERE id_cliente = 2;
 #------------------------------------------------------------------------------------------------------------------------------------------------
