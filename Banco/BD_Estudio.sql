@@ -229,6 +229,7 @@ CREATE TABLE tbl_registro(
 	dado_ant VARCHAR(50), #Guarda o dado antes da modificação
 	dado_novo VARCHAR(50), #Guarda o dado após a modificação
 	data_alt TIMESTAMP DEFAULT NOW(), #Data alteração
+	campo VARCHAR(12), #Campo alterado
 	fk_id_login INT(10) UNSIGNED, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
 	PRIMARY KEY(id_reg),
 	
