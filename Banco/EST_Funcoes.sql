@@ -17,34 +17,6 @@ BEGIN
 	RETURN CONCAT('R$', formatado);
 END $
 DELIMITER ;
-<<<<<<< HEAD
-
-SELECT formatar_moeda(1);
-=======
->>>>>>> e7c66fff2016dc5ffd2d10d11420701523b33499
-#------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-#------------------------------------------------------------------------------------------------------------------------------------------------
-#FUNÇÃO QUE CALCULA A IDADE
-DELIMITER $
-CREATE FUNCTION calcula_idade(cod_cliente INT(10)) RETURNS INT(10)
-DETERMINISTIC
-BEGIN
-	
-	DECLARE idade INT(10);
-	DECLARE data_nascimento CHAR(12);
-
-	SET @data_nascimento = (SELECT data_nasc FROM tbl_cliente WHERE id_cli = cod_cliente);
-	SET @idade = (SELECT YEAR(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(@data_nascimento))) AS Idade);
-	RETURN @idade;
-
-END $
-DELIMITER ;
-<<<<<<< HEAD
-
-SELECT calcula_idade(1);
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -70,6 +42,3 @@ DELIMITER ;
 SELECT calcula_idade(1);
 #------------------------------------------------------------------------------------------------------------------------------------------------
 */
-=======
-#------------------------------------------------------------------------------------------------------------------------------------------------
->>>>>>> e7c66fff2016dc5ffd2d10d11420701523b33499

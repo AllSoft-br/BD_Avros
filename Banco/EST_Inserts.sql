@@ -103,16 +103,16 @@ SELECT * FROM tbl_rel;
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #TABELA ORCAMENTO
-INSERT INTO tbl_orcamento(desc_tatto, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
 VALUES ('Dragão com garras de metal', 'cartão', 1090.98, 4, 1);
 
-INSERT INTO tbl_orcamento(desc_tatto, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
 VALUES ('Logotipo do Corinthians', 'Dinheiro', 398.80, 3, 2);
 
-INSERT INTO tbl_orcamento(desc_tatto, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
 VALUES ('Frase de amor aos pais', 'Cartão', 200.00, 2, 3);
 
-INSERT INTO tbl_orcamento(desc_tatto, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
+INSERT INTO tbl_orcamento(desc_tatoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc)
 VALUES ('Coruja colorida', 'Não específicado ..hmm..', 50.00, 1, 4);
 
 SELECT * FROM tbl_orcamento;
