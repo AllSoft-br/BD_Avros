@@ -29,7 +29,7 @@ CREATE TABLE tbl_login (
   CPF CHAR(11) UNIQUE NOT NULL,
   login VARCHAR(30) NOT NULL,
   senha VARCHAR(16) NOT NULL,
-  admin BOOLEAN DEFAULT '1', # 1 = Administrador, 0 = Comum
+  admin BOOLEAN DEFAULT '0', # 1 = Administrador, 0 = Comum
   ativo BOOLEAN DEFAULT '1', # 1 = Ativo, 0 = Inativo
   PRIMARY KEY (id_login));
 #-----------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE tbl_cliente (
   id_cli INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   CPF CHAR(11) UNIQUE NOT NULL,
-  sexo BOOLEAN DEFAULT 0, # 0 = Masculino, 1 = Feminino
+  sexo BOOLEAN, # 0 = Masculino, 1 = Feminino
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
   estado VARCHAR(30),
@@ -68,7 +68,7 @@ CREATE TABLE tbl_representante (
   id_representante INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   CPF CHAR(11) UNIQUE NOT NULL,
-  sexo BOOLEAN DEFAULT 0, # 0 = masculino, 1 = feminino
+  sexo BOOLEAN, # 0 = masculino, 1 = feminino
   data_nasc DATE NOT NULL,
   tel VARCHAR(20) NOT NULL,
   PRIMARY KEY (id_representante));
@@ -123,14 +123,14 @@ CREATE TABLE tbl_rel (
 #-----------------------------------------------------------------------------------------------------------
 #Tabela Orçamento
 CREATE TABLE tbl_orcamento (
-  cod_orc INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_orc INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
-  desc_tatto TINYTEXT NOT NULL,
+  desc_tatoo TINYTEXT NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
   fk_id_cli_orc INT(10) UNSIGNED NOT NULL, #Criação do campo da chave estrangeira da tabela Cliente
-  PRIMARY KEY (cod_orc),
+  PRIMARY KEY (id_orc),
 
   INDEX idx_fk_orcamento_cliente (fk_id_cli_orc ASC),
 
@@ -152,14 +152,14 @@ CREATE TABLE tbl_sessao (
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   data_agendada DATE NOT NULL,
   hora_agendada TIME NOT NULL,
-  desconto DECIMAL(10,2) NULL DEFAULT '0',
-  fk_cod_orc INT(10) UNSIGNED NOT NULL, #Chave estrangeira tabela Orçamento
+  desconto DECIMAL(10,2) NULL DEFAULT '0.00',
+  fk_id_orc INT(10) UNSIGNED NOT NULL, #Chave estrangeira tabela Orçamento
   PRIMARY KEY (id_sessao),
 
-  INDEX idx_fk_sessao_orcamento (fk_cod_orc ASC),
+  INDEX idx_fk_sessao_orcamento (fk_id_orc ASC),
   CONSTRAINT fk_tbl_sessao_orcamento
-    FOREIGN KEY (fk_cod_orc) #Criando a Chave Estrangeira
-    REFERENCES tbl_orcamento (cod_orc)
+    FOREIGN KEY (fk_id_orc) #Criando a Chave Estrangeira
+    REFERENCES tbl_orcamento (id_orc)
     ON DELETE NO ACTION #Permite que as chaves sejam excluidas e atualizadas
     ON UPDATE NO ACTION); #Permite que as chaves sejam excluidas e atualizadas
 #-----------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ CREATE TABLE tbl_sessao (
 #-----------------------------------------------------------------------------------------------------------
 #Tabela Orçamento Concluidos - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_orccon (
-  cod_orccon INT(10) NOT NULL,
+  id_orccon INT(10) NOT NULL,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
   desc_tatto TINYTEXT NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
@@ -177,7 +177,7 @@ CREATE TABLE tbl_orccon (
   qntd_sessao INT(10) NOT NULL,
   dt_ins TIMESTAMP DEFAULT NOW(),
   fk_id_cli_orccon INT(10) UNSIGNED NOT NULL, #Criação do campo da chave estrangeira da tabela Cliente
-  PRIMARY KEY (cod_orccon),
+  PRIMARY KEY (id_orccon),
 
   INDEX idx_fk_orccon_cliente (fk_id_cli_orccon ASC),
 
@@ -201,14 +201,14 @@ CREATE TABLE tbl_sescon (
   hora_agendada TIME NOT NULL,
   desconto DECIMAL(10,2) NULL DEFAULT '0.00',
   dt_ins TIMESTAMP DEFAULT NOW(),
-  fk_cod_orccon INT(10), #Chave estrangeira tabela Orçamento
+  fk_id_orccon INT(10), #Chave estrangeira tabela Orçamento
   PRIMARY KEY (id_sescon),
 
-  INDEX idx_fk_sescon_orccon (fk_cod_orccon ASC),
+  INDEX idx_fk_sescon_orccon (fk_id_orccon ASC),
 
   CONSTRAINT fk_tbl_sescon_orccon
-    FOREIGN KEY (fk_cod_orccon) #Criando a Chave Estrangeira
-    REFERENCES tbl_orccon (cod_orccon)
+    FOREIGN KEY (fk_id_orccon) #Criando a Chave Estrangeira
+    REFERENCES tbl_orccon (id_orccon)
     ON DELETE NO ACTION #Permite que as chaves sejam excluidas e atualizadas
     ON UPDATE NO ACTION); #Permite que as chaves sejam excluidas e atualizadas
 #-----------------------------------------------------------------------------------------------------------

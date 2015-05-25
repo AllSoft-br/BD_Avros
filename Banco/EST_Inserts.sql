@@ -32,10 +32,10 @@ SELECT * FROM tbl_login;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #INSERTS DA TABELA CLIENTE
 INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-VALUES ('Douglas Lambertinny', '64837748274', '1994/04/20', '9876-5432', 1);
+VALUES ('Douglas Lambertinny', '64837748274', '1994/12/04', '9876-5432', 1);
 
 INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
-VALUES ('Luana Ferreira Nascimento', '37485574758', 1, '1997-07-14', '1234-5678', 2);
+VALUES ('Luana Ferreira Nascimento', '37485574758', 1, '1998-07-20', '1234-5678', 2);
 
 INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
 VALUES ('Japa Itapecerica', '63857365982', '1998-03-19', '8374-8374', 2);
@@ -122,40 +122,40 @@ SELECT * FROM tbl_orcamento;
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #TABELA SESSÃO
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 100.00, 'cartão', '2015-06-15', '15:00', 1);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 100.00, 'cartão', '2015-06-25', '13:00', 1);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 100.00, 'cartão', '2015-07-10', '15:00', 1);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('1', 100.00, 'cartão', '2015-07-30', '15:00', 1);
 
 
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 132.93, 'Dinheiro', '2015-06-22', '19:00', 2);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 132.93, 'Dinheiro', '2015-07-07', '19:00', 2);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('1', 132.93, 'Dinheiro', '2015-07-22', '19:00', 2);
 
 
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('0', 100.00, 'Cartão', '2015-08-12', '17:00', 3);
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('1', 100.00, 'Cartão', '2015-08-30', '12:00', 3);
 
 
 
-INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_cod_orc)
+INSERT INTO tbl_sessao(concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orc)
 VALUES ('1', 50.00, 'Não especificada ..hm..', '2015-08-15', '22:00', 4);
 
 SELECT * FROM tbl_sessao;

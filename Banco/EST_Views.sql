@@ -68,3 +68,16 @@ CREATE VIEW auditoria_1m AS
 		FROM tbl_registro 
 		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 1 MONTH);
 #-----------------------------------------------------------------------------------
+
+
+/*
+#-----------------------------------------------------------------------------------
+#Auditoria - últimas 24h
+CREATE VIEW menores18 AS
+	SELECT * 
+		FROM tbl_cliente cli, 
+		WHERE calcula_idade(id_cli) < 18
+		AND ;
+
+SELECT * FROM menores18;
+#-----------------------------------------------------------------------------------

@@ -8,44 +8,44 @@ CREATE PROCEDURE orcamento_concluido(IN id_orc INT(10))
 		DECLARE nsessoes INT(10);
 		DECLARE concluidas INT(10);
 		
-		SELECT qntd_sessao FROM tbl_orcamento WHERE cod_orc = id_orc INTO @nsessoes;
+		SELECT qntd_sessao FROM tbl_orcamento WHERE id_orc = id_orc INTO @nsessoes;
 		SELECT COUNT(id_sessao) FROM tbl_sessao 
 				WHERE concluida = 1
-				AND fk_cod_orc = id_orc INTO @concluidas;
+				AND fk_id_orc = id_orc INTO @concluidas;
 
 		IF @nsessoes <= @concluidas THEN
 
-			INSERT INTO tbl_orccon(cod_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
-			SELECT cod_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
+			INSERT INTO tbl_orccon(id_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
+			SELECT id_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
 			FROM tbl_orcamento
-			WHERE cod_orc = id_orc;
+			WHERE id_orc = id_orc;
 
-			INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orccon)
-			SELECT id_sessao, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orc
+			INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_id_orccon)
+			SELECT id_sessao, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_id_orc
 			FROM tbl_sessao	
-			WHERE fk_cod_orc = id_orc
-			#GROUP BY fk_cod_orc
+			WHERE fk_id_orc = id_orc
+			#GROUP BY fk_id_orc
 			;
 
-			DELETE FROM tbl_sessao WHERE fk_cod_orc = id_orc;
-			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;
+			DELETE FROM tbl_sessao WHERE fk_id_orc = id_orc;
+			DELETE FROM tbl_orcamento WHERE id_orc = id_orc;
 
 			INSERT INTO tbl_registro (tabela_alt, cod_ref, acao, desc_acao, cod_sql)
 			VALUES ('tbl_orcamento', id_orc, 'delete', CONCAT('o pagamento da última sessão do orçamento ', CAST(id_orc AS CHAR(15)),
-			' foi efetuado, e o orçamento foi concluído'), 'INSERT INTO tbl_orccon(cod_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
-			SELECT cod_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
+			' foi efetuado, e o orçamento foi concluído'), 'INSERT INTO tbl_orccon(id_orccon, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
+			SELECT id_orc, criado_em, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orc
 			FROM tbl_orcamento
-			WHERE cod_orc = id_orc;
+			WHERE id_orc = id_orc;
 
-			INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orccon)
-			SELECT id_sessao, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_cod_orc
+			INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_id_orccon)
+			SELECT id_sessao, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, desconto, fk_id_orc
 			FROM tbl_sessao	
-			WHERE fk_cod_orc = id_orc
-			#GROUP BY fk_cod_orc
+			WHERE fk_id_orc = id_orc
+			#GROUP BY fk_id_orc
 			;
 
-			DELETE FROM tbl_sessao WHERE fk_cod_orc = id_orc;
-			DELETE FROM tbl_orcamento WHERE cod_orc = id_orc;');
+			DELETE FROM tbl_sessao WHERE fk_id_orc = id_orc;
+			DELETE FROM tbl_orcamento WHERE id_orc = id_orc;');
 
 		END IF;
 	
@@ -63,7 +63,7 @@ CREATE PROCEDURE del_sessao(IN fk_id_orc INT(10))
 
 	BEGIN
 
-		DELETE FROM tbl_sessao WHERE fk_cod_orc = fk_id_orc;
+		DELETE FROM tbl_sessao WHERE fk_id_orc = fk_id_orc;
 	
 	END $
 
@@ -80,7 +80,7 @@ CREATE PROCEDURE del_orcamento(IN fk_id_orc INT(10))
 	BEGIN
 
 		CALL del_sessao(fk_id_orc);
-		DELETE FROM tbl_orcamento WHERE cod_orc = fk_id_orc;
+		DELETE FROM tbl_orcamento WHERE id_orc = fk_id_orc;
 	
 	END $
 
