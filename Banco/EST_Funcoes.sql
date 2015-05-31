@@ -75,3 +75,182 @@ DELIMITER ;
 
 #SELECT is_autorizado(1);
 #------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE Verifica se o representante tem um cliente cadastrado em seu nome
+#Digita o ID do representante que retorna a idade dele
+DELIMITER $
+CREATE FUNCTION representa_cliente(codigo_representante INT(10)) RETURNS BOOLEAN
+DETERMINISTIC
+BEGIN
+	
+	DECLARE nrelacoes INT(10);
+	DECLARE representa BOOLEAN;
+
+	SET @nrelacoes = (SELECT COUNT(id_rel) FROM tbl_rel WHERE fk_id_representante = codigo_representante);
+
+	IF @nrelacoes > 0 THEN
+		SET @representa = TRUE;
+	ELSE
+		SET @representa = FALSE;
+	END IF;
+
+	RETURN @representa;
+
+END $
+DELIMITER ;
+
+#SELECT representa_cliente(1);
+#SELECT * FROM tbl_representante;
+#SELECT * FROM tbl_rel;
+#SELECT * FROM tbl_cliente;
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE CONVERTE O VALOR BOOLEAN EM UM VARCHAR
+#Digita o valor do boolean que converte nas palavras "Comum" ou "Administrador"
+DELIMITER $
+CREATE FUNCTION conv_admin(admin BOOLEAN) RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+	
+	DECLARE conversao VARCHAR(30);
+
+		IF admin = 0 THEN
+			SET @conversao = 'Comum';
+		ELSE
+			SET @conversao = 'Administrador';
+		END IF;
+
+	RETURN @conversao;
+
+END $
+DELIMITER ;
+
+#SELECT conv_admin(0);
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE CONVERTE O VALOR BOOLEAN EM UM VARCHAR
+#Digita o valor do boolean que converte nas palavras "Inativo" ou "Ativo"
+DELIMITER $
+CREATE FUNCTION conv_ativo(ativo BOOLEAN) RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+	
+	DECLARE conversao VARCHAR(30);
+
+		IF ativo = 0 THEN
+			SET @conversao = 'Inativo';
+		ELSE
+			SET @conversao = 'Ativo';
+		END IF;
+
+	RETURN @conversao;
+
+END $
+DELIMITER ;
+
+#SELECT conv_ativo(0);
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE CONVERTE O VALOR BOOLEAN EM UM VARCHAR
+#Digita o valor do boolean que converte nas palavras "Masculino" ou "Feminino"
+DELIMITER $
+CREATE FUNCTION conv_sexo(sexo BOOLEAN) RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+	
+	DECLARE conversao VARCHAR(30);
+
+		IF sexo = 0 THEN
+			SET @conversao = 'Masculino';
+		ELSE
+			SET @conversao = 'Feminino';
+		END IF;
+
+	RETURN @conversao;
+
+END $
+DELIMITER ;
+
+#SELECT conv_sexo(0);
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE CONVERTE O VALOR BOOLEAN EM UM VARCHAR
+#Digita o valor do boolean que converte nas palavras "CONCLUIDA" ou "NÃO CONCLUIDA"
+DELIMITER $
+CREATE FUNCTION conv_concluido(concluido BOOLEAN) RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+	
+	DECLARE conversao VARCHAR(30);
+
+		IF concluido = 0 THEN
+			SET @conversao = 'Não concluido';
+		ELSE
+			SET @conversao = 'Concluido';
+		END IF;
+
+	RETURN @conversao;
+
+END $
+DELIMITER ;
+
+#SELECT conv_concluido(0);
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/*
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#FUNÇÃO QUE CALCULA O TEMPO QUE FOI CRIADO O LOGIN
+#Digita o ID do login cadastrado, seleciona a data e hora de criação e retorna desde que foi criada
+DELIMITER $
+CREATE FUNCTION tempo_login(cod_login INT(10)) RETURNS VARCHAR(40)
+DETERMINISTIC
+BEGIN
+
+		DECLARE dia_cadastro TIMESTAMP;
+		DECLARE ano, mes, dia, hora, final VARCHAR(40);
+
+		SET @dia_cadastro = (SELECT data_criacao FROM tbl_login WHERE id_login = cod_login);
+		#Retorna a data completa da criação do login
+
+		SET @ano = (SELECT TIMESTAMPDIFF(YEAR, @dia_cadastro, NOW()));
+		#Retorna a diferença do ano da criação do login até hoje
+
+		SET @mes = (SELECT TIMESTAMPDIFF(MONTH, @dia_cadastro, NOW()));
+		#Retorna a diferença de mêses da criação do login até hoje
+
+		SET @dia = (SELECT TIMESTAMPDIFF(DAY, @dia_cadastro, NOW()));
+		#Retorna a diferença de dias da criação do login até hoje
+
+		SET @hora = (SELECT SEC_TO_TIME((SELECT TIMESTAMPDIFF(SECOND, @dia_cadastro, NOW()))));
+		#Retorna a diferença do ano da criação do login até hoje
+
+		RETURN @tempo_cadastro;
+END $
+DELIMITER ;
+
+
+
+DROP FUNCTION calcula_data;
+
+SELECT calcula_data(6);
+SELECT * FROM tbl_login;
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT TIMEDIFF('2015-05-31', '2015-03-15');

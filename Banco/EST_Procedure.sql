@@ -3,15 +3,14 @@
 
 DELIMITER $
 CREATE PROCEDURE orcamento_concluido(IN id_orcamento INT(10))
+#O parâmetro de entrada é o ID do orçamento a ser movido para as tabelas orccon e sescon.
 
 	BEGIN
 		DECLARE nsessoes INT(10);
 		DECLARE concluidas INT(10);
 		
-		SELECT qntd_sessao FROM tbl_orcamento WHERE id_orc = id_orcamento INTO @nsessoes;
-		SELECT COUNT(id_sessao) FROM tbl_sessao 
-				WHERE concluida = 1
-				AND fk_id_orc = id_orcamento INTO @concluidas;
+		SET @nsessoes = (SELECT qntd_sessao FROM tbl_orcamento WHERE id_orc = id_orcamento);
+		SET @concluidas = (SELECT COUNT(id_sessao) FROM tbl_sessao WHERE concluida = 1 AND fk_id_orc = id_orcamento);
 
 		IF @nsessoes <= @concluidas THEN
 
@@ -66,6 +65,7 @@ DELIMITER ;
 #Procedure que deleta as sessões
 DELIMITER $
 CREATE PROCEDURE del_sessao(IN fk_id_orcamento INT(10))
+#O parâmetro de entrada é o ID do orçamento a ser excluido.
 
 	BEGIN
 
@@ -86,6 +86,7 @@ Delimiter ;
 #Procedure que deleta os orçamentos e sessões caso houver
 DELIMITER $
 CREATE PROCEDURE del_orcamento(IN fk_id_orcamento INT(10))
+#O parâmetro de entrada é o ID do orçamento a ser excluido.
 
 	BEGIN
 
@@ -107,6 +108,7 @@ DELIMITER ;
 #Procedure que deleta as sessões da tbl_sescon
 DELIMITER $
 CREATE PROCEDURE del_sescon(IN fk_id_orcamento INT(10))
+#O parâmetro de entrada é o ID do orçamento concluido a ser excluido.
 
 	BEGIN
 
@@ -124,9 +126,10 @@ Delimiter ;
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
-#Procedure que deleta os orçamentos
+#Procedure que deleta os dados do orlçamento concluido e suas respectivas sessão concluidas
 DELIMITER $
 CREATE PROCEDURE del_orccon(IN fk_id_orcamento INT(10))
+#O parâmetro de entrada é o ID do orçamento concluido a ser excluido.
 
 	BEGIN
 
@@ -145,9 +148,10 @@ DELIMITER ;
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
-#Procedure que deleta os orçamentos
+#Procedure que deleta a relação de um cliente
 DELIMITER $
 CREATE PROCEDURE del_relacao(IN fk_id_cliente INT(10))
+#O parâmetro de entrada é o ID do cliente que possui a relação a ser excluida.
 
 	BEGIN
 
@@ -166,13 +170,38 @@ DELIMITER ;
 
 
 
-#------------------------------------------------------------------------------------------------------------------------------------------------
-#Procedure que deleta os orçamentos
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+#Procedure que deleta o representante e a sua respectiva relação
 DELIMITER $
-CREATE PROCEDURE del_cliente(IN id_cliente INT(10))
+CREATE PROCEDURE del_representante(IN codigo_representante INT(10))
+#O parâmetro de entrada é o ID do representante a ser excluido.
 
 	BEGIN
 
+		DECLARE id_cliente INT(10);
+
+		SET @id_cliente = (SELECT fk_id_cli FROM tbl_rel WHERE fk_id_representante = codigo_representante);
+		CALL del_relacao(@id_cliente);
+		DELETE FROM tbl_representante WHERE id_representante = codigo_representante;
+	
+	END $
+
+Delimiter ;
+
+#CALL del_representante(1);
+#SELECT * FROM tbl_representante;
+#SELECT * FROM tbl_rel;
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#Procedure que deleta o cliente
+DELIMITER $
+CREATE PROCEDURE del_cliente(IN id_cliente INT(10))
+#O parâmetro de entrada é o ID do cliente a ser excluido.
+
+	BEGIN
 		DECLARE id_orcamento INT(10);
 		DECLARE id_orcamentoc INT(10);
 
@@ -183,8 +212,7 @@ CREATE PROCEDURE del_cliente(IN id_cliente INT(10))
 		CALL del_orccon(@id_orcamentoc);
 
 		CALL del_relacao(id_cliente);
-		DELETE FROM tbl_cliente WHERE id_cli = id_cliente;
-	
+		DELETE FROM tbl_cliente WHERE id_cli = id_cliente;	
 	END $
 
 DELIMITER ;

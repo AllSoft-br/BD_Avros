@@ -31,6 +31,7 @@ CREATE TABLE tbl_login (
   senha VARCHAR(16) NOT NULL,
   admin BOOLEAN DEFAULT '0', # 1 = Administrador, 0 = Comum
   ativo BOOLEAN DEFAULT '1', # 1 = Ativo, 0 = Inativo
+  data_criacao TIMESTAMP DEFAULT NOW(), #Data que o login  foi criado
   PRIMARY KEY (id_login));
 #-----------------------------------------------------------------------------------------------------------
 
@@ -147,7 +148,7 @@ CREATE TABLE tbl_orcamento (
 #Tabela Sessão
 CREATE TABLE tbl_sessao (
   id_sessao INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  concluida boolean NULL DEFAULT 0, #0 não concluida, 1 concluida
+  concluida BOOLEAN DEFAULT 0, #0 não concluida, 1 concluida
   valor_sessao DECIMAL(10,2) NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   data_agendada DATE NOT NULL,
@@ -194,7 +195,7 @@ CREATE TABLE tbl_orccon (
 #Tabela Sessões Concluídas - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_sescon (
   id_sescon INT(10) UNSIGNED NOT NULL,
-  concluida BOOLEAN NULL DEFAULT 0, #0 não concluida, 1 concluida
+  concluida BOOLEAN DEFAULT 0, #0 não concluida, 1 concluida
   valor_sessao DECIMAL(10,2) NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   data_agendada DATE NOT NULL,

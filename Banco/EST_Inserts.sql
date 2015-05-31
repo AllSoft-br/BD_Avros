@@ -19,8 +19,8 @@ VALUES ('Eduardo de Souza', '12398765436', 'Edu', '321');
 INSERT INTO tbl_login (nome, CPF, login, senha)
 VALUES ('Lohan William', '63826344802', 'Lohan', '231');
 
-INSERT INTO tbl_login (nome, CPF, login, senha)
-VALUES ('Ronaldo Nazaro', '73648371758', 'Rnd', '213');
+INSERT INTO tbl_login (nome, CPF, login, senha, data_criacao)
+VALUES ('Ronaldo Nazaro', '73643471758', 'Rnd2', '213', '2000-05-31 14:17:07');
 
 #SELECT * FROM tbl_login;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,8 +51,8 @@ VALUES ('Vanessa Lira', '83647362717', 1, '1992-01-07', '5601-0893', 3);
 INSERT INTO tbl_representante (nome, CPF, sexo,  data_nasc, tel)
 VALUES ('Eucrimaria Luiza Ferreira Nascimento', '37474456283', 1, '1960/12/10', '6253-7474'); 
 
-INSERT INTO tbl_representante (nome, CPF, data_nasc, tel)
-VALUES ('China da Serra', '93472647364', '1978/02/01', '6208-8062'); 
+INSERT INTO tbl_representante (nome, CPF, sexo, data_nasc, tel)
+VALUES ('China da Serra', '93472647364', 0, '1978/02/01', '6208-8062'); 
 
 #SELECT * FROM tbl_representante;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -165,10 +165,10 @@ VALUES ('1', 50.00, 'Não especificada ..hm..', '2015-08-15', '22:00', 4);
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #TABELA ORCCON
 INSERT INTO tbl_orccon(id_orccon, desc_tattoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
-VALUES (1, 'Dragão com garras de metal', 'cartão', 1090.98, 4, 1);
+VALUES (1, 'Dragão com garras de metal', 'cartão', 1090.98, 2, 1);
 
 INSERT INTO tbl_orccon(id_orccon, desc_tattoo, tipo_pagamento, valor_total, qntd_sessao, fk_id_cli_orccon)
-VALUES (2, 'Logotipo do Corinthians', 'Dinheiro', 398.80, 3, 2);
+VALUES (2, 'Logotipo do Corinthians', 'Dinheiro', 398.80, 2, 2);
 
 #SELECT * FROM tbl_orccon;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -178,13 +178,13 @@ VALUES (2, 'Logotipo do Corinthians', 'Dinheiro', 398.80, 3, 2);
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #TABELA SESCON
 INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orccon)
-VALUES (1, '0', 100.00, 'cartão', '2015-06-15', '15:00', 1);
+VALUES (1, '1', 100.00, 'cartão', '2015-06-15', '15:00', 1);
 
 INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orccon)
 VALUES (2, '1', 100.00, 'cartão', '2015-06-25', '13:00', 1);
 
 INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orccon)
-VALUES (3, '0', 70.00, 'dinheiro', '2016-02-03', '15:00', 2);
+VALUES (3, '1', 70.00, 'dinheiro', '2016-02-03', '15:00', 2);
 
 INSERT INTO tbl_sescon(id_sescon, concluida, valor_sessao, tipo_pagamento, data_agendada, hora_agendada, fk_id_orccon)
 VALUES (4, '1', 70.00, 'dinheiro', '2016-05-22', '15:00', 2);

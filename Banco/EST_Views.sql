@@ -32,6 +32,7 @@ CREATE VIEW auditoria_24h AS
 		FROM tbl_registro 
 		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 1 DAY);
 
+SELECT * FROM auditoria_24h;
 #-----------------------------------------------------------------------------------
 
 
