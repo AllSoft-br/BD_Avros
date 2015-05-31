@@ -8,7 +8,7 @@ USE bd_estudio;
 CREATE TABLE empresa_dados(
   cnpj CHAR(18) UNIQUE NOT NULL,
   razao_social VARCHAR(50) NOT NULL,
-  tel VARCHAR(20) NOT NULL,
+  tel VARCHAR(20),
   uf VARCHAR(30),
   cidade VARCHAR(30),
   bairro VARCHAR(30),  
@@ -24,10 +24,10 @@ CREATE TABLE empresa_dados(
 #------------------------------------------------------------------------------------------------------------
 #Tabela Login
 CREATE TABLE tbl_login (
-  id_login INT(10) UNSIGNED UNIQUE NOT NULL AUTO_INCREMENT,
+  id_login INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   CPF CHAR(11) UNIQUE NOT NULL,
-  login VARCHAR(30) NOT NULL,
+  login VARCHAR(30) UNIQUE NOT NULL,
   senha VARCHAR(16) NOT NULL,
   admin BOOLEAN DEFAULT '0', # 1 = Administrador, 0 = Comum
   ativo BOOLEAN DEFAULT '1', # 1 = Ativo, 0 = Inativo
@@ -44,7 +44,7 @@ CREATE TABLE tbl_cliente (
   CPF CHAR(11) UNIQUE NOT NULL,
   sexo BOOLEAN, # 0 = Masculino, 1 = Feminino
   data_nasc DATE NOT NULL,
-  tel VARCHAR(20) NOT NULL,
+  tel VARCHAR(20),
   estado VARCHAR(30),
   cidade VARCHAR(30),
   bairro VARCHAR(30),
@@ -70,7 +70,7 @@ CREATE TABLE tbl_representante (
   CPF CHAR(11) UNIQUE NOT NULL,
   sexo BOOLEAN, # 0 = masculino, 1 = feminino
   data_nasc DATE NOT NULL,
-  tel VARCHAR(20) NOT NULL,
+  tel VARCHAR(20),
   PRIMARY KEY (id_representante));
 #------------------------------------------------------------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE tbl_rel (
 CREATE TABLE tbl_orcamento (
   id_orc INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
-  desc_tatoo TINYTEXT NOT NULL,
+  desc_tattoo TINYTEXT,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
@@ -169,9 +169,9 @@ CREATE TABLE tbl_sessao (
 #-----------------------------------------------------------------------------------------------------------
 #Tabela Orçamento Concluidos - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_orccon (
-  id_orccon INT(10) NOT NULL,
+  id_orccon INT(10) UNSIGNED NOT NULL,
   criado_em DATETIME NULL DEFAULT CURRENT_TIMESTAMP, #Busca a hora atual do sistema
-  desc_tatto TINYTEXT NOT NULL,
+  desc_tattoo TINYTEXT,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
   valor_total DECIMAL(10,2) NOT NULL,
   qntd_sessao INT(10) NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE tbl_orccon (
 #-----------------------------------------------------------------------------------------------------------
 #Tabela Sessões Concluídas - Tabela onde os arquivos só serão jogados após a conclusão das sessões
 CREATE TABLE tbl_sescon (
-  id_sescon INT(10) NOT NULL,
+  id_sescon INT(10) UNSIGNED NOT NULL,
   concluida BOOLEAN NULL DEFAULT 0, #0 não concluida, 1 concluida
   valor_sessao DECIMAL(10,2) NOT NULL,
   tipo_pagamento VARCHAR(30) NOT NULL, #Cartão, dinheiro ou Não especificado
@@ -201,7 +201,7 @@ CREATE TABLE tbl_sescon (
   hora_agendada TIME NOT NULL,
   desconto DECIMAL(10,2) NULL DEFAULT '0.00',
   dt_ins TIMESTAMP DEFAULT NOW(),
-  fk_id_orccon INT(10), #Chave estrangeira tabela Orçamento
+  fk_id_orccon INT(10) UNSIGNED NOT NULL, #Chave estrangeira tabela Orçamento
   PRIMARY KEY (id_sescon),
 
   INDEX idx_fk_sescon_orccon (fk_id_orccon ASC),
@@ -218,18 +218,17 @@ CREATE TABLE tbl_sescon (
 
 #-----------------------------------------------------------------------------------------------------------
 #Tabela Auditoria
-
 CREATE TABLE tbl_registro(
 	id_reg INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	tabela_alt VARCHAR(30) NOT NULL, #Nome da tabela que recebeu a ação
-	cod_ref INT(10) NOT NULL, #Campo que vai referenciar o ID da pessoa/objeto da tabela alterada
+	tabela_alt VARCHAR(30), #Nome da tabela que recebeu a ação
+	cod_ref INT(10), #Campo que vai referenciar o ID da pessoa/objeto da tabela alterada
 	acao VARCHAR(15) NOT NULL, #Ação feita, insert/update/delete
-	desc_acao TINYTEXT NOT NULL, #Recebe o código usado na alteração
+	desc_acao TINYTEXT, #Recebe o código usado na alteração
 	cod_sql TEXT, #Guarda o código SQL usado
-	dado_ant VARCHAR(50), #Guarda o dado antes da modificação
-	dado_novo VARCHAR(50), #Guarda o dado após a modificação
+	dado_ant TINYTEXT, #Guarda o dado antes da modificação
+	campo VARCHAR(20), #Campo da modificação
+	dado_novo TINYTEXT, #Guarda o dado após a modificação
 	data_alt TIMESTAMP DEFAULT NOW(), #Data alteração
-	campo VARCHAR(12), #Campo alterado
 	fk_id_login INT(10) UNSIGNED, #Chave estrangeira que liga com a tabela login, porque só que irá realizar qualquer ação são eles
 	PRIMARY KEY(id_reg),
 	
