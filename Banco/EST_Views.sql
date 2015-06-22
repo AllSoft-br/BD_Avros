@@ -51,7 +51,7 @@ CREATE VIEW auditoria_3d AS
 #-----------------------------------------------------------------------------------
 #Auditoria - últimos 7 dias
 CREATE VIEW auditoria_7d AS
-	SELECT * 
+	SELECT *
 		FROM tbl_registro 
 		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 7 DAY);
 #-----------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ CREATE VIEW auditoria_7d AS
 #-----------------------------------------------------------------------------------
 #Auditoria - último mês
 CREATE VIEW auditoria_1m AS
-	SELECT * 
+	SELECT *
 		FROM tbl_registro 
 		WHERE data_alt > DATE_SUB(NOW(), INTERVAL 1 MONTH);
 #-----------------------------------------------------------------------------------

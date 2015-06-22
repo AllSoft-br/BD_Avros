@@ -1,5 +1,6 @@
 
-CREATE DATABASE bd_estudio;
+CREATE DATABASE bd_estudio
+CHARSET = Latin1 COLLATE = latin1_swedish_ci;
 
 USE bd_estudio;
 

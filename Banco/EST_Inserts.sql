@@ -25,18 +25,18 @@ VALUES ('Ronaldo Nazaro', '73643471758', 'Rnd2', '213', '2000-05-31 14:17:07');
 #SELECT * FROM tbl_login;
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+select * from tbl_orcamento;
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 #INSERTS DA TABELA CLIENTE
-INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-VALUES ('Douglas Lambertinny', '64837748274', '1994/12/04', '9876-5432', 1);
+INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
+VALUES ('Douglas Lambertinny', '64837748274', 0, '1994/12/04', '9876-5432', 1);
 
 INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
 VALUES ('Luana Ferreira Nascimento', '37485574758', 1, '1998-07-20', '1234-5678', 2);
 
-INSERT INTO tbl_cliente (nome, CPF, data_nasc, tel, fk_id_login)
-VALUES ('Japa Itapecerica', '63857365982', '1998-03-19', '8374-8374', 2);
+INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
+VALUES ('Japa Itapecerica', '63857365982', 0, '1998-03-19', '8374-8374', 2);
 
 INSERT INTO tbl_cliente (nome, CPF, sexo, data_nasc, tel, fk_id_login)
 VALUES ('Vanessa Lira', '83647362717', 1, '1992-01-07', '5601-0893', 3);

@@ -62,7 +62,7 @@ BEGIN
 	#Guarda na variável um número inteiro que conta se o cliente digitado no parâmetro de entrada possui alguma relação
 
 	#Compara se o COUNT retornou algum registro e se esse cliente digitado no parâmetro de entrada é maior de idade
-	IF @qntd_reg > 0 AND calcula_idade(cod_cliente) > 18 THEN
+	IF @qntd_reg > 0 OR calcula_idade(cod_cliente) > 18 THEN
 		SET @possui_representante = TRUE; #Se for verdadeiro retorna 1
 	ELSE
 		SET @possui_representante = FALSE; #Se for falso retorna 0
@@ -174,8 +174,10 @@ BEGIN
 
 		IF sexo = 0 THEN
 			SET @conversao = 'Masculino';
-		ELSE
+		ELSEIF sexo = 1 then
 			SET @conversao = 'Feminino';
+		else
+			SET @conversao = '-';
 		END IF;
 
 	RETURN @conversao;
@@ -183,7 +185,7 @@ BEGIN
 END $
 DELIMITER ;
 
-#SELECT conv_sexo(0);
+#SELECT conv_sexo(null);
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 
